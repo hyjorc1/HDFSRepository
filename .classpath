@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.jgit-4.0.1.201506240215-r-javadoc.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.jgit-4.0.1.201506240215-r-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.jgit-4.0.1.201506240215-r.jar" sourcepath="/compiler/lib/datagen/org.eclipse.jgit-4.0.1.201506240215-r-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/hyj/boa-workspace/compiler/lib/datagen/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/slf4j-api-1.4.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/slf4j-log4j12-1.4.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/app-1.3.200-v20130910-1609-javadoc.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/app-1.3.200-v20130910-1609-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/app-1.3.200-v20130910-1609.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/cssparser-0.9.23-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/cssparser-0.9.23.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/dom4j-2.0.2-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/dom4j-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/eclipse.jdt.core.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/gson-gson-parent-2.7.zip"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/jena-core-2.7.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/jena-iri-0.9.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/jsoup-1.10.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/jsoup-1.10.3-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/jsoup-1.10.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/maven-model-3.0-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/maven-model-3.0.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.core.contenttype_3.4.100.dist.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.core.filesystem_1.6.0.v20160503-1608.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.core.jobs_3.5.101.dist.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.core.resources_3.7.101.dist.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.core.runtime_3.7.0.dist.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.dltk.core_5.7.1.201703020501.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.equinox.common_3.6.0.dist.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.equinox.preferences_3.4.2.dist.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.equinox.registry_3.5.100.v20110502.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.equinox.registry.source_3.5.100.v20110502.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.osgi_3.9.1.v20130814-1242.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.osgi.source_3.9.1.v20130814-1242.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.php.core_4.3.1.201703301037.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.php.core.parser_4.3.1.201703301037.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.php.core.parser.source_4.3.1.201703301037.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.php.core.source_4.3.1.201703301037.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.text-3.5.101-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.text-3.5.101.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/org.eclipse.wst.jsdt.core_1.3.1.v201401291437.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/plexus-utils-2.0.5-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/plexus-utils-2.0.5.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/protobuf-2.5.0.zip"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/protobuf-java-2.5.0.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/rhino-1.7.7.1-sources.zip"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/rhino-1.7.7.1.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/sac.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/sacjavadoc-1.3.zip"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/svnkit-1.7.6.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/trove-3.0.3-src.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/trove-3.0.3.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/xml-apis.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/xml-security-impl-1.0.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-lang3-3.9-sources.jar"/>
+	<classpathentry kind="lib" path="/compiler/lib/datagen/commons-lang3-3.9.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
