@@ -41,6 +41,15 @@ public class Test {
 
 		Repository repo1 = new FileRepositoryBuilder().setGitDir(new File("/Users/hyj/Desktop/hyjorc1/my-example/.git"))
 				.build();
+		
+		FileNode node2 = SerializationUtils.deserialize(data);
+		
+		System.out.println("sample1");
+		node2.writeContentsToDir("/Users/hyj/Desktop/sample1");
+		
+		Repository repo2 = new FileRepositoryBuilder().setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
+				.build();
+
 	}
 
 	private static void writeToFile(FileNode node, String filepath) {

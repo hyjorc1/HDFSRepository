@@ -15,18 +15,25 @@ public class FileNode implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean isDirectory;
 	private String name;
+	private FileNode parent;
 	private List<FileNode> list;
 	private byte[] bytes;
 
-	public FileNode(File file) throws IOException {
+	public FileNode(File file) {
 		build(file);
 	}
 	
-	private FileNode(String name) {
+	public FileNode(String name) {
 		this.name = name;
+		this.parent = null;
 		this.list = null;
 		this.bytes = null;
 		this.isDirectory = false;
+	}
+	
+	public FileNode(String name, FileNode parent) {
+		this(name);
+		this.parent = parent;
 	}
 
 	public void writeContentsToDir(String outputPath) throws IOException {
@@ -66,7 +73,7 @@ public class FileNode implements Serializable {
 		}
 	}
 
-	public void build(File file) throws IOException {
+	public void build(File file) {
 		this.name = file.getName();
 		Stack<File> files = new Stack<File>();
 		Stack<FileNode> nodes = new Stack<FileNode>();
@@ -82,7 +89,7 @@ public class FileNode implements Serializable {
 				curNode.isDirectory = true;
 				curNode.list = new ArrayList<FileNode>();
 				for (File f : curFile.listFiles()) {
-					FileNode childNode = new FileNode(f.getName());
+					FileNode childNode = new FileNode(f.getName(), curNode);
 					curNode.list.add(childNode);
 					nodes.push(childNode);
 					files.push(f);
@@ -101,6 +108,34 @@ public class FileNode implements Serializable {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public boolean isDirectory() {
+		return this.isDirectory;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public List<FileNode> getList() {
+		return this.list;
+	}
+	
+	public byte[] getBytes() {
+		return this.bytes;
+	}
+	
+	public FileNode getParent() {
+		return this.parent;
+	}
+	
+	public void settParent(FileNode parent) {
+		this.parent = parent;
 	}
 
 }
