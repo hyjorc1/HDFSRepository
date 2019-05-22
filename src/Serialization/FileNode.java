@@ -16,6 +16,7 @@ public class FileNode implements Serializable {
 	private boolean isDirectory;
 	private String name;
 	private FileNode parent;
+	private int idx;
 	private List<FileNode> list;
 	private byte[] bytes;
 
@@ -26,14 +27,16 @@ public class FileNode implements Serializable {
 	public FileNode(String name) {
 		this.name = name;
 		this.parent = null;
+		this.setIdx(-1);
 		this.list = null;
 		this.bytes = null;
 		this.isDirectory = false;
 	}
 	
-	public FileNode(String name, FileNode parent) {
+	public FileNode(String name, FileNode parent, int idx) {
 		this(name);
 		this.parent = parent;
+		this.setIdx(idx);
 	}
 
 	public void writeContentsToDir(String outputPath) throws IOException {
@@ -89,7 +92,7 @@ public class FileNode implements Serializable {
 				curNode.isDirectory = true;
 				curNode.list = new ArrayList<FileNode>();
 				for (File f : curFile.listFiles()) {
-					FileNode childNode = new FileNode(f.getName(), curNode);
+					FileNode childNode = new FileNode(f.getName(), curNode, list.size());
 					curNode.list.add(childNode);
 					nodes.push(childNode);
 					files.push(f);
@@ -136,6 +139,14 @@ public class FileNode implements Serializable {
 	
 	public void settParent(FileNode parent) {
 		this.parent = parent;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 
 }
