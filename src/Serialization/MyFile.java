@@ -283,10 +283,10 @@ public class MyFile extends java.io.File implements Serializable {
 		return getPath();
 	}
 
-	@Override
-	private synchronized void writeObject(java.io.ObjectOutputStream s) throws IOException {
-		s.defaultWriteObject();
-		s.writeChar(separatorChar); // Add the separator character
-	}
+//	@Override
+//	private synchronized void writeObject(java.io.ObjectOutputStream s) throws IOException {
+//		s.defaultWriteObject();
+//		s.writeChar(separatorChar); // Add the separator character
+//	}
 
 }

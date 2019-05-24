@@ -22,10 +22,10 @@ public class Test {
 		FileNode node = new FileNode(new File(path));
 		
 		// Serializable Object
-		Serializable serializable = (Serializable) node;
+//		Serializable serializable = (Serializable) node;
 
 		
-		byte[] data = SerializationUtils.serialize(serializable);
+		byte[] data = SerializationUtils.serialize(node);
 		
 		// Writing the Object/ Directory in a file
 		writeToFile(node, "/Users/hyj/Desktop/sample.o");
