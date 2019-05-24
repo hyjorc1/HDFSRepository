@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyFile extends java.io.File {
+public class MyFile extends java.io.File implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -211,66 +212,81 @@ public class MyFile extends java.io.File {
 	public boolean renameTo(File dest) {
 		return true;
 	}
-	
+
 	@Override
 	public boolean setLastModified(long time) {
 		return true;
 	}
-	
+
 	@Override
 	public boolean setReadOnly() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean setWritable(boolean writable, boolean ownerOnly) {
 		return true;
 	}
-	
+
 	@Override
 	public boolean setWritable(boolean writable) {
-        return true;
-    }
-	
+		return true;
+	}
+
 	@Override
 	public boolean setReadable(boolean readable, boolean ownerOnly) {
-        return true;
-    }
-	
+		return true;
+	}
+
 	@Override
 	public boolean setReadable(boolean readable) {
 		return true;
-    }
-	
+	}
+
 	@Override
 	public boolean setExecutable(boolean executable, boolean ownerOnly) {
-        return true;
-    }
-	
+		return true;
+	}
+
 	@Override
 	public boolean setExecutable(boolean executable) {
-        return true;
-    }
-	
+		return true;
+	}
+
 	@Override
 	public boolean canExecute() {
-        return false;
-    }
-	
+		return false;
+	}
+
 	/* -- Filesystem interface -- */
 	/* -- Disk usage -- */
 	/* -- Temporary files -- */
 	/* -- Basic infrastructure -- */
 	public int compareTo(MyFile file) {
-        return node.getName().compareTo(file.node.getName());
-    }
-	
+		return node.getName().compareTo(file.node.getName());
+	}
+
 	@Override
 	public boolean equals(Object obj) {
-        if ((obj != null) && (obj instanceof MyFile)) {
-            return compareTo((MyFile)obj) == 0;
-        }
-        return false;
-    }
-	
+		if ((obj != null) && (obj instanceof MyFile))
+			return compareTo((MyFile) obj) == 0;
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getName().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return getPath();
+	}
+
+	@Override
+	private synchronized void writeObject(java.io.ObjectOutputStream s) throws IOException {
+		s.defaultWriteObject();
+		s.writeChar(separatorChar); // Add the separator character
+	}
+
 }

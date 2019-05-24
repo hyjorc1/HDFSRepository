@@ -39,7 +39,8 @@ public class Test {
 //		Repository repo = new FileRepositoryBuilder()
 //				.setGitDir(new File("/Users/hyj/git/BoaData/DataSet/newExample/repos/hyjorc1/my-example/.git")).build();
 
-		Repository repo1 = new FileRepositoryBuilder().setGitDir(new File("/Users/hyj/Desktop/hyjorc1/my-example/.git"))
+		Repository repo1 = new FileRepositoryBuilder()
+				.setGitDir(new File("/Users/hyj/Desktop/hyjorc1/my-example/.git"))
 				.build();
 		
 		FileNode node2 = SerializationUtils.deserialize(data);
@@ -47,7 +48,8 @@ public class Test {
 		System.out.println("sample1");
 		node2.writeContentsToDir("/Users/hyj/Desktop/sample1");
 		
-		Repository repo2 = new FileRepositoryBuilder().setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
+		Repository repo2 = new FileRepositoryBuilder()
+				.setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
 				.build();
 
 	}
