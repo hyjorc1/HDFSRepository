@@ -1,6 +1,7 @@
 
 package Serialization;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,15 +12,34 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.hadoop.fs.Path;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.ObjectLoader;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevTree;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.treewalk.filter.PathFilter;
 
-public class Test {
+import boa.datagen.util.FileIO;
+import boa.evaluator.BoaEvaluator;
+import boa.types.Diff.ChangedFile;
 
+public class Test  {
+
+	private static final ByteArrayOutputStream buffer = new ByteArrayOutputStream(4096);
+	
 	public static void main(String[] args) throws Exception {
 		// Serializing the directory
-		String path = "/Users/hyj/git/BoaData/DataSet/newExample/repos/hyjorc1";
+//		String path = "/Users/hyj/git/BoaData/DataSet/a8";
+		String path = "/Users/hyj/Desktop/hyjorc1";
+		long before = usedMem();
 		FileNode node = new FileNode(new File(path));
+		long after = usedMem();
+		System.out.println(after - before);
 		
 		// Serializable Object
 //		Serializable serializable = (Serializable) node;
@@ -45,13 +65,74 @@ public class Test {
 		
 		FileNode node2 = SerializationUtils.deserialize(data);
 		
+		
+		
 		System.out.println("sample1");
 		node2.writeContentsToDir("/Users/hyj/Desktop/sample1");
+		
+		
 		
 		Repository repo2 = new FileRepositoryBuilder()
 				.setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
 				.build();
+		
+		
+//		Repository repo3 = new FileRepositoryBuilder()
+//				.setGitDir(new MyFile(node2))
+//				.build();
+		
+//		System.out.println(getFileContent(repo2, "9e4029c363aca2648151ccfceb17ab999237430c", "src/org/birds/Bird.java"));
+		// target method
+		System.out.println(getFileContent2(repo2));
+		
+		
+		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample1/")).start();
+		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample.o")).start();
+		
 
+//		System.out.println(getFileContent(repo2, "9e4029c363aca2648151ccfceb17ab999237430c", "src/org/birds/Bird.java"));
+	}
+	
+	public static long usedMem() {
+		return Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+	}
+	
+	public static final String getFileContent2(Repository repo) throws IOException {
+		ObjectId fileid = ObjectId.fromString("0aae0f6ea47d4181e10dc57ecf7a822df8c1373e");
+		try {
+			buffer.reset();
+			buffer.write(repo.open(fileid, Constants.OBJ_BLOB).getCachedBytes());
+			return buffer.toString();
+		} catch (final Throwable e) {
+			return null;
+		}
+	}
+	
+	public static final String getFileContent(Repository repo, String id, String fileName) throws IOException {
+		ObjectId oid = repo.resolve(id);
+		String content = null;
+    	RevWalk revWalk = new RevWalk(repo);
+        RevCommit commit = revWalk.parseCommit(oid);
+        RevTree tree = commit.getTree();
+        try {
+        	TreeWalk tw = new TreeWalk(repo);
+            tw.addTree(tree);
+            tw.setRecursive(true);
+            tw.setFilter(PathFilter.create(fileName));
+            if (tw.next()) {
+            	ObjectLoader loader = repo.open(tw.getObjectId(0));
+	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	            loader.copyTo(baos);
+	            content = baos.toString();
+            }
+        } catch (Exception e) {
+        	System.err.println(e);
+		} finally {
+			revWalk.dispose();
+            revWalk.close();
+            repo.close();
+		}
+		return content;
 	}
 
 	private static void writeToFile(FileNode node, String filepath) {

@@ -40,7 +40,11 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.equinox.registry.source_3.5.100.v20110502.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-4.0.1.201506240215-r-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-4.0.1.201506240215-r-sources.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.jgit-4.0.1.201506240215-r.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jgit-4.0.1.201506240215-r.jar" sourcepath="lib/org.eclipse.jgit-4.0.1.201506240215-r-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/Users/hyj/boa-workspace/Test/lib/org.eclipse.jgit-4.0.1.201506240215-r-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/org.eclipse.osgi_3.9.1.v20130814-1242.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.osgi.source_3.9.1.v20130814-1242.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.php.core_4.3.1.201703301037.jar"/>
@@ -66,5 +70,24 @@
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/xml-security-impl-1.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/compiler"/>
+	<classpathentry kind="lib" path="lib/antlr-4.5-complete.jar"/>
+	<classpathentry kind="lib" path="lib/checkstyle-6.19-all.jar"/>
+	<classpathentry kind="lib" path="lib/com.jcraft.jsch-all-1.0.1.release.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-math-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-release-1.0.4.zip"/>
+	<classpathentry kind="lib" path="lib/hamcrest-all-1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-all-1.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-all-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-core-1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-core-1.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.11-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.11-sources.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="lib/mrunit-0.9.0-incubating-hadoop1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

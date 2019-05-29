@@ -23,7 +23,7 @@ public class FileNode implements Serializable {
 	public FileNode(File file) {
 		build(file);
 	}
-	
+
 	public FileNode(String name) {
 		this.name = name;
 		this.parent = null;
@@ -32,7 +32,7 @@ public class FileNode implements Serializable {
 		this.bytes = null;
 		this.isDirectory = false;
 	}
-	
+
 	public FileNode(String name, FileNode parent, int idx) {
 		this(name);
 		this.parent = parent;
@@ -45,7 +45,7 @@ public class FileNode implements Serializable {
 		writeToFile(outputPath, this);
 	}
 
-	private void writeToFile(String parentPath, FileNode node) {
+	private void writeToFile(String parentPath, FileNode node) throws IOException {
 		Stack<String> paths = new Stack<String>();
 		Stack<FileNode> nodes = new Stack<FileNode>();
 		nodes.push(node);
@@ -60,18 +60,22 @@ public class FileNode implements Serializable {
 					nodes.push(childNode);
 					paths.push(curParentPath);
 				}
-			} else if (curNode.bytes != null) {
-				new File(curParentPath).mkdirs();
+			} else {
 				File file = new File(curParentPath, curNode.name);
 				file.setReadable(true, false);
-				file.setWritable(true, false);			
-				try (FileOutputStream fos = new FileOutputStream(file)) {
+				file.setWritable(true, false);
+
+				FileOutputStream fos = null;
+				try {
+					fos = new FileOutputStream(file);
 					fos.write(curNode.bytes);
 					fos.flush();
-					fos.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-				} 
+				} finally {
+					if (fos != null)
+						fos.close();
+				}
 			}
 		}
 	}
@@ -103,40 +107,51 @@ public class FileNode implements Serializable {
 
 	private byte[] getBytes(File file) {
 		byte[] bytes = new byte[(int) file.length()];
-		try (FileInputStream fileInputStream = new FileInputStream(file)) {
+
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(file);
 			fileInputStream.read(bytes);
 			fileInputStream.close();
 			return bytes;
-		} catch (IOException e ) {
+		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (fileInputStream != null) {
+				try {
+					fileInputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return null;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}
-	
+
 	public boolean isDirectory() {
 		return this.isDirectory;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<FileNode> getList() {
 		return this.list;
 	}
-	
+
 	public byte[] getBytes() {
 		return this.bytes;
 	}
-	
+
 	public FileNode getParent() {
 		return this.parent;
 	}
-	
+
 	public void settParent(FileNode parent) {
 		this.parent = parent;
 	}
