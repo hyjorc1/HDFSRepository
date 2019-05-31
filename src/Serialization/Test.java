@@ -9,10 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.hadoop.fs.Path;
+import org.eclipse.jgit.internal.storage.file.HDFSRepositoryBuilder;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectLoader;
@@ -20,13 +18,8 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.treewalk.TreeWalk;
 import org.eclipse.jgit.treewalk.filter.PathFilter;
-
-import boa.datagen.util.FileIO;
-import boa.evaluator.BoaEvaluator;
-import boa.types.Diff.ChangedFile;
 
 public class Test  {
 
@@ -47,21 +40,21 @@ public class Test  {
 		
 		byte[] data = SerializationUtils.serialize(node);
 		
-		// Writing the Object/ Directory in a file
-		writeToFile(node, "/Users/hyj/Desktop/sample.o");
-
-		// Reading the object again from file
-		FileNode node1 = readFromFile("/Users/hyj/Desktop/sample.o");
-
-		// Writing the contents of Object back to file system
-		node1.writeContentsToDir("/Users/hyj/Desktop");
+//		// Writing the Object/ Directory in a file
+//		writeToFile(node, "/Users/hyj/Desktop/sample.o");
+//
+//		// Reading the object again from file
+//		FileNode node1 = readFromFile("/Users/hyj/Desktop/sample.o");
+//
+//		// Writing the contents of Object back to file system
+//		node1.writeContentsToDir("/Users/hyj/Desktop");
 
 //		Repository repo = new FileRepositoryBuilder()
 //				.setGitDir(new File("/Users/hyj/git/BoaData/DataSet/newExample/repos/hyjorc1/my-example/.git")).build();
 
-		Repository repo1 = new FileRepositoryBuilder()
-				.setGitDir(new File("/Users/hyj/Desktop/hyjorc1/my-example/.git"))
-				.build();
+//		Repository repo1 = new FileRepositoryBuilder()
+//				.setGitDir(new File("/Users/hyj/Desktop/hyjorc1/my-example/.git"))
+//				.build();
 		
 		FileNode node2 = SerializationUtils.deserialize(data);
 		
@@ -72,7 +65,11 @@ public class Test  {
 		
 		
 		
-		Repository repo2 = new FileRepositoryBuilder()
+//		Repository repo2 = new FileRepositoryBuilder()
+//				.setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
+//				.build();
+		
+		Repository repo3 = new HDFSRepositoryBuilder()
 				.setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
 				.build();
 		
@@ -82,15 +79,19 @@ public class Test  {
 //				.build();
 		
 //		System.out.println(getFileContent(repo2, "9e4029c363aca2648151ccfceb17ab999237430c", "src/org/birds/Bird.java"));
+		
 		// target method
-		System.out.println(getFileContent2(repo2));
+//		System.out.println(getFileContent2(repo2));
+		System.out.println(getFileContent2(repo3));
 		
 		
-		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample1/")).start();
-		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample.o")).start();
+//		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample1/")).start();
+//		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample.o")).start();
 		
 
 //		System.out.println(getFileContent(repo2, "9e4029c363aca2648151ccfceb17ab999237430c", "src/org/birds/Bird.java"));
+		
+		
 	}
 	
 	public static long usedMem() {

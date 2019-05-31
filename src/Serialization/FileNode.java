@@ -6,9 +6,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import org.eclipse.jgit.util.FS;
 
 public class FileNode implements Serializable {
 
@@ -19,6 +22,10 @@ public class FileNode implements Serializable {
 	private int idx;
 	private List<FileNode> list;
 	private byte[] bytes;
+	
+	// for HDFSFileSnapshot
+	private long modified;
+	private long size;
 
 	public FileNode(File file) {
 		build(file);
@@ -31,6 +38,8 @@ public class FileNode implements Serializable {
 		this.list = null;
 		this.bytes = null;
 		this.isDirectory = false;
+		this.setModified(-1);
+		this.setSize(-1);
 	}
 
 	public FileNode(String name, FileNode parent, int idx) {
@@ -90,9 +99,11 @@ public class FileNode implements Serializable {
 			FileNode curNode = nodes.pop();
 			File curFile = files.pop();
 			if (curFile.isFile()) {
+				curNode.updateModifiedAndSize(curFile);
 				curNode.isDirectory = false;
 				curNode.bytes = getBytes(curFile);
 			} else {
+				curNode.updateModifiedAndSize(curFile);
 				curNode.isDirectory = true;
 				curNode.list = new ArrayList<FileNode>();
 				for (File f : curFile.listFiles()) {
@@ -102,6 +113,18 @@ public class FileNode implements Serializable {
 					files.push(f);
 				}
 			}
+		}
+	}
+
+	private void updateModifiedAndSize(File curFile) {
+		BasicFileAttributes fileAttributes;
+		try {
+			fileAttributes = FS.DETECTED.fileAttributes(curFile);
+			this.setModified(fileAttributes.lastModifiedTime().toMillis());
+			this.setSize(fileAttributes.size());
+		} catch (IOException e) {
+			this.setModified(curFile.lastModified());
+			this.setSize(curFile.length());
 		}
 	}
 
@@ -162,6 +185,22 @@ public class FileNode implements Serializable {
 
 	public void setIdx(int idx) {
 		this.idx = idx;
+	}
+
+	public long getModified() {
+		return modified;
+	}
+
+	public void setModified(long modified) {
+		this.modified = modified;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
 	}
 
 }
