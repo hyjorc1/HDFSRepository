@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.apache.commons.lang.SerializationUtils;
-import org.eclipse.jgit.internal.storage.boa.HDFSFile;
+import org.eclipse.jgit.internal.storage.file.HDFSFile;
 import org.eclipse.jgit.internal.storage.file.HDFSRepositoryBuilder;
 import org.eclipse.jgit.lib.Repository;
 
