@@ -68,10 +68,7 @@ public class Test  {
 //		Repository repo2 = new FileRepositoryBuilder()
 //				.setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
 //				.build();
-		
-		Repository repo3 = new HDFSRepositoryBuilder()
-				.setGitDir(new File("/Users/hyj/Desktop/sample1/hyjorc1/my-example/.git"))
-				.build();
+
 		
 		
 //		Repository repo3 = new FileRepositoryBuilder()
@@ -82,7 +79,7 @@ public class Test  {
 		
 		// target method
 //		System.out.println(getFileContent2(repo2));
-		System.out.println(getFileContent2(repo3));
+//		System.out.println(getFileContent2(repo3));
 		
 		
 //		new Thread(new FileIO.DirectoryRemover("/Users/hyj/Desktop/sample1/")).start();
@@ -98,8 +95,8 @@ public class Test  {
 		return Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 	}
 	
-	public static final String getFileContent2(Repository repo) throws IOException {
-		ObjectId fileid = ObjectId.fromString("0aae0f6ea47d4181e10dc57ecf7a822df8c1373e");
+	public static final String getFileContent2(Repository repo, String oid) throws IOException {
+		ObjectId fileid = ObjectId.fromString(oid);
 		try {
 			buffer.reset();
 			buffer.write(repo.open(fileid, Constants.OBJ_BLOB).getCachedBytes());
