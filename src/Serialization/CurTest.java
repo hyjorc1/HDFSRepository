@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.SerializationUtils;
-import org.eclipse.jgit.internal.storage.file.HDFSFile;
-import org.eclipse.jgit.internal.storage.file.HDFSRepositoryBuilder;
+import org.eclipse.jgit.internal.storage.file.ByteArrayFile;
+import org.eclipse.jgit.internal.storage.file.ByteArrayRepositoryBuilder;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectLoader;
@@ -46,11 +46,11 @@ public class CurTest {
 //				System.out.println(f.getPath());
 //				System.out.println(f.getParent());
 //				
-		HDFSFile node = new HDFSFile(path).build();
+		ByteArrayFile node = new ByteArrayFile(path);
 
 		String output = "/Users/hyj/Desktop/sample.o";
 		writeToFile(node, output);
-		HDFSFile node1 = readFromFile(output);
+		ByteArrayFile node1 = readFromFile(output);
 		node1.writeContentsToDir("/Users/hyj/Desktop/repos");
 		Repository repo2 = new FileRepositoryBuilder()
 				.setGitDir(new File("/Users/hyj/Desktop/repos/hyjorc1/my-example/.git")).build();
@@ -66,31 +66,33 @@ public class CurTest {
 
 	private static void testHDFSRepositoryBuilder() throws IOException {
 		// CHECKME test HDFSRepositoryBuilder
-//		String path = "/Users/hyj/Desktop/hyjorc1/my-example/.git";
-		String path = "/Users/hyj/Desktop/Activiti/Activiti/.git";
-		HDFSFile node = new HDFSFile(path).build();
+		String path = "/Users/hyj/Desktop/hyjorc1/my-example/.git";
+//		String path = "/Users/hyj/Desktop/Activiti/Activiti/.git";
+//		String path = "/Users/hyj/git/BoaData/DataSet/new_activiti/repos/Activiti/Activiti/.git";
+		ByteArrayFile node = new ByteArrayFile(path);
 		
 //		deleteDirectory(new File(path));
 		
-//		String oid1 = "0aae0f6ea47d4181e10dc57ecf7a822df8c1373e"; // newExample
-//		String oid2 = "3a1fb12eb0a5e087698c54f794b46571e9c309d7"; // Activiti
+		String oid1 = "0aae0f6ea47d4181e10dc57ecf7a822df8c1373e"; // newExample
+		String oid2 = "3a1fb12eb0a5e087698c54f794b46571e9c309d7"; // Activiti
 		Repository fRepo = new FileRepositoryBuilder().setGitDir(new File(path)).build();
-		Repository oRepo = new HDFSRepositoryBuilder().setGitDir(node).build();
-//		System.out.println(getFileContent2(oRepo, oid2));
-//		if (getFileContent2(fRepo, oid2).equals(getFileContent2(oRepo, oid2)))
-//			System.out.println("true");
+		Repository oRepo = new ByteArrayRepositoryBuilder().setGitDir(node).build();
+		System.out.println(getFileContent2(oRepo, oid1));
+		System.out.println(getFileContent2(oRepo, oid2));
 
-		List<String> lines = readAsList("/Users/hyj/Desktop/oids.text");
-		System.out.println(lines.size());
-		for (String line : lines) {
-			String oid = line;
-			if (oid.length() != 40) {
-				System.out.println("invalid: " + oid);
-			} else {
-				if (!getFileContent2(fRepo, oid).equals(getFileContent2(oRepo, oid)))
-					System.out.println("unmatched: " + oid);
-			}
-		}
+//		deleteDirectory(new File(path));
+//		
+//		List<String> lines = readAsList("/Users/hyj/Desktop/oids.text");
+//		System.out.println(lines.size());
+//		for (String line : lines) {
+//			String oid = line;
+//			if (oid.length() != 40) {
+//				System.out.println("invalid: " + oid);
+//			} else {
+//				if (!getFileContent2(fRepo, oid).equals(getFileContent2(oRepo, oid)))
+//					System.out.println("unmatched: " + oid);
+//			}
+//		}
 	}
 
 	public static final String getFileContent2(Repository repo, String oid) throws IOException {
@@ -131,7 +133,7 @@ public class CurTest {
 		return content;
 	}
 
-	private static void writeToFile(HDFSFile node, String filepath) {
+	private static void writeToFile(ByteArrayFile node, String filepath) {
 		try (FileOutputStream fout = new FileOutputStream(filepath, true);
 				ObjectOutputStream oos = new ObjectOutputStream(fout)) {
 			oos.writeObject(node);
@@ -141,10 +143,10 @@ public class CurTest {
 		}
 	}
 
-	private static HDFSFile readFromFile(String filepath) {
+	private static ByteArrayFile readFromFile(String filepath) {
 		try (FileInputStream streamIn = new FileInputStream(filepath);
 				ObjectInputStream objectinputstream = new ObjectInputStream(streamIn)) {
-			HDFSFile node = (HDFSFile) objectinputstream.readObject();
+			ByteArrayFile node = (ByteArrayFile) objectinputstream.readObject();
 			objectinputstream.close();
 			return node;
 		} catch (FileNotFoundException e) {

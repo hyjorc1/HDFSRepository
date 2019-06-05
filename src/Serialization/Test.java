@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import org.apache.commons.lang3.SerializationUtils;
-import org.eclipse.jgit.internal.storage.file.HDFSRepositoryBuilder;
+import org.eclipse.jgit.internal.storage.file.ByteArrayRepositoryBuilder;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectLoader;
